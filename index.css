@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f5f5f5;
+}
+
+.topbar {
+  background: #8ecae6;
+  padding: 12px 20px;
+  font-weight: bold;
+}
+
+/* GRID */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 16px;
+  padding: 16px;
+  zoom: 150%;
+}
+
+/* TILE BASE */
+.tile {
+  background: #eaeaea;
+  border: 2px solid #222;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+}
+
+/* LAYOUT POSITIES */
+.physical {
+  grid-row: 1 / span 3;
+}
+
+.growth {
+  grid-column: 2 / span 2;
+}
+
+.profile {
+  grid-column: 4;
+}
+
+.mood-image{
+    width: 80px;
+}
+
+.satisfaction {
+  grid-column: 2;
+}
+
+
+.energy {
+  grid-column: 3;
+}
+
+.pain {
+  grid-column: 2 / span 2;
+  justify-self: center;
+  width: 50%;
+}
+
+.exercises {
+  grid-column: 4;
+  grid-row: 2 / span 2;
+
+}
+
+/* SILHOUET PLACEHOLDER */
+.silhouette {
+  height: 400px;
+  background: black;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* ARM CIRCLES */
+.silhouette::before,
+.silhouette::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.silhouette::before {
+  width: 40px;
+  height: 40px;
+  background: green;
+  right: 20px;
+  top: 80px;
+}
+
+.silhouette::after {
+  width: 40px;
+  height: 40px;
+  background: red;
+  right: 10px;
+  bottom: 80px;
+}
+
+/* GROWTH */
+.growth-value {
+  font-size: 64px;
+  color: green;
+  font-weight: bold;
+}
+
+/* PROFILE */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+/* SCORES */
+.score {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* COLORS */
+.satisfaction {
+  background: #b7e4c7;
+}
+
+.energy {
+  background: #f4c27a;
+}
+
+.pain {
+  background: #f4978e;
+}
+

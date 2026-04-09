@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --medical-blue: #023047;
+            --accent-blue: #219ebc;
+            --warning-red: #e63946;
+            --neutral-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #333;
+            line-height: 1.5;
+            padding: 30px;
+            background-color: #fff;
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--neutral-bg);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .patient-header h1 { margin: 0; font-size: 28px; color: var(--medical-blue); }
+        .patient-id { color: #666; font-family: monospace; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--neutral-bg);
+            padding-bottom: 5px;
+        }
+
+        .med-card {
+            background: var(--neutral-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-row:last-child { border: none; }
+        .label { font-weight: 600; color: #555; }
+        .value { text-align: right; }
+
+        .vital-sign {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 10px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .vital-sign .label { display: block; font-size: 12px; }
+        .vital-sign .num { font-size: 20px; font-weight: bold; color: var(--medical-blue); }
+
+        .allergy-warning {
+            color: var(--warning-red);
+            font-weight: bold;
+            background: #ffe5e5;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="patient-header">
+        <h1>Jan Jansen</h1>
+        <span class="patient-id">BSN: 123.456.789 | Geb: 03-08-1968</span>
+    </div>
+    <div style="text-align: right;">
+        <div class="vital-sign">
+            <span class="label">Bloeddruk</span>
+            <span class="num">135/85</span>
+        </div>
+        <div class="vital-sign">
+            <span class="label">BMI</span>
+            <span class="num">26.4</span>
+        </div>
+    </div>
+</header>
+
+<div class="grid">
+    <div>
+        <h2>Klinische Diagnose</h2>
+        <div class="med-card">
+            <div class="info-row">
+                <span class="label">Type Incident</span>
+                <span class="value">Ischemisch CVA (Herseninfarct)</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Locatie</span>
+                <span class="value">A. Cerebri Media (Rechts)</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Classificatie</span>
+                <span class="value">TOAST: Small-vessel occlusion</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Comorbiditeit</span>
+                <span class="value">Hypertensie, DM Type II</span>
+            </div>
+        </div>
+
+        <h2>Allergieën & Waarschuwingen</h2>
+        <div class="allergy-warning">
+            ⚠️ Contrastvloeistof (Jodium) - Ernstig
+        </div>
+    </div>
+
+    <div>
+        <h2>Actuele Medicatie (Medicatiekaart)</h2>
+        <div class="med-card" style="background: #fff; border: 1px solid #ddd;">
+            <div class="info-row">
+                <span class="label">Antitrombotica</span>
+                <span class="value">Clopidogrel 75mg 1dd1</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Statines</span>
+                <span class="value">Atorvastatine 40mg 1dd1</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Antidiabetica</span>
+                <span class="value">Metformine 500mg 2dd1</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Antihypertensiva</span>
+                <span class="value">Perindopril 4mg 1dd1</span>
+            </div>
+        </div>
+
+        <h2>Laboratorium Trends (LDL-Cholesterol)</h2>
+        <div id="labChart"></div>
+    </div>
+</div>
+
+<script>
+    // D3 Lab Trend: Cholesterol verloop
+    const labData = [
+        {date: "Okt", val: 4.2},
+        {date: "Nov", val: 3.8},
+        {date: "Dec", val: 2.9},
+        {date: "Jan", val: 1.8} // Streefwinst zichtbaar
+    ];
+
+    const width = 350, height = 150, margin = 30;
+    const svg = d3.select("#labChart")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    const x = d3.scalePoint().range([margin, width-margin]).domain(labData.map(d => d.date));
+    const y = d3.scaleLinear().range([height-margin, margin]).domain([0, 5]);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height-margin})`)
+        .call(d3.axisBottom(x));
+
+    svg.append("path")
+        .datum(labData)
+        .attr("fill", "none")
+        .attr("stroke", "#219ebc")
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x(d => x(d.date))
+            .y(d => y(d.val))
+        );
+
+    svg.selectAll("circle")
+        .data(labData)
+        .enter().append("circle")
+        .attr("cx", d => x(d.date))
+        .attr("cy", d => y(d.val))
+        .attr("r", 4)
+        .attr("fill", "#023047");
+</script>
+
+</body>
+</html>

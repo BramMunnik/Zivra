@@ -186,7 +186,6 @@ const overlayContent = {
     url: "profile.html" // De pagina die je in het iframe wilt laden
   },
   satisfaction: {
-    title: "Tevredenheid",
     url: "satisfaction.html" // De pagina die je in het iframe wilt laden
   },
   energy: {

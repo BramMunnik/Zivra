@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="status.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Specifieke kleuren voor de fysieke segmenten */
+        .line-shoulder { stroke: #023047; stroke-dasharray: none; } /* Donkerblauw */
+        .line-upper { stroke: #219ebc; stroke-dasharray: none; }    /* Lichtblauw */
+        .line-lower { stroke: #fb8500; stroke-dasharray: none; }    /* Oranje */
+        
+        .dot-shoulder { fill: #023047; stroke: #fff; stroke-width: 2; }
+        .dot-upper { fill: #219ebc; stroke: #fff; stroke-width: 2; }
+        .dot-lower { fill: #fb8500; stroke: #fff; stroke-width: 2; }
+
+        .shoulder-label { color: #023047; }
+        .upper-label { color: #219ebc; }
+        .lower-label { color: #fb8500; }
+    </style>
+</head>
+<body>
+
+    <h2>Fysieke Groei & Mobiliteit</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Huidige Mobiliteit</span>
+            <span id="current-growth" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Sessie Verschil</span>
+            <span id="growth-diff" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Totale Groei</span>
+            <span id="growth-trend" class="stat-value">-</span>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-header">
+            <h3>ROM (Range of Motion) per armsegment over tijd</h3>
+        </div>
+        
+        <div class="controls">
+            <label class="checkbox-container shoulder-label">
+                <input type="checkbox" id="toggle-shoulder" checked> Schouder
+            </label>
+            <label class="checkbox-container upper-label">
+                <input type="checkbox" id="toggle-upper" checked> Bovenarm
+            </label>
+            <label class="checkbox-container lower-label">
+                <input type="checkbox" id="toggle-lower" checked> Onderarm
+            </label>
+        </div>
+
+        <div id="growth-chart"></div>
+    </div>
+
+    <script src="growth.js"></script>
+</body>
+</html>

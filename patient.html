@@ -27,10 +27,22 @@
   </div>
 
   <!-- Midden boven -->
-  <div class="tile growth" onclick="openOverlay('growth')">
+<div class="tile growth" onclick="openOverlay('growth')">
     <h2>Totale groei</h2>
     <div class="growth-value">0%</div>
     <p>Sinds begin traject</p>
+  </div>
+
+  <div class="tile session-control">
+    <h3>Tijdlijn</h3>
+    <div class="session-nav">
+      <button id="btn-prev" class="nav-btn">❮</button>
+      <div class="session-info">
+        <span id="session-title">Sessie -</span>
+        <span id="session-date">Datum -</span>
+      </div>
+      <button id="btn-next" class="nav-btn">❯</button>
+    </div>
   </div>
 
   <!-- Rechts boven -->
@@ -60,6 +72,8 @@
     <div id="pain-level" class="score">3/10</div>
   </div>
 </div>
+
+
 
 <!--weg klikken van tile-->
 <div class="overlay-backdrop" id="overlay" onclick="closeOnBackdrop(event)">

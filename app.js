@@ -173,18 +173,30 @@ progressCircle.append("text")
 
 // inhoud tile
 const overlayContent = {
-  profile: {
-    title: "Patiëntprofiel & Analyse",
-    url: "profile_details.html" // De pagina die je in het iframe wilt laden
-  },
   physical: {
-    title: "Gedetailleerde Fysieke Analyse",
-    url: "physical_charts.html"
+    title: "Fysieke staat",
+    url: "physical.html" // De pagina die je in het iframe wilt laden
   },
   growth: {
-    title: "Groei Grafieken",
-    url: "growth_d3.html"
-  }
+    title: "Totale groei",
+    url: "growth.html" // De pagina die je in het iframe wilt laden
+  },
+  profile: {
+    title: "Jan Jansen",
+    url: "profile.html" // De pagina die je in het iframe wilt laden
+  },
+  satisfaction: {
+    title: "Tevredenheid",
+    url: "satisfaction.html" // De pagina die je in het iframe wilt laden
+  },
+  energy: {
+    title: "Energieniveau",
+    url: "energy.html" // De pagina die je in het iframe wilt laden
+  },
+  pain: {
+    title: "Pijnscore",
+    url: "pain.html" // De pagina die je in het iframe wilt laden
+  },
 };
 
 // overlay functie

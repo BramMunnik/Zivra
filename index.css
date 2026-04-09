@@ -2,7 +2,7 @@
   --primary: #023047;
   --secondary: #8ecae6;
   --accent: #219ebc;
-  --bg-color: #f8fafc; /* Zachtere achtergrond */
+  --bg-color: #dae1e6; /* Zachtere achtergrond */
   --card-bg: #ffffff;
   --text-main: #334155;
   --text-muted: #64748b;
@@ -128,11 +128,6 @@ a {
   font-size: 24px;
 }
 .avatar::after { content: "JJ"; } /* Initialen toevoegen */
-
-.progression-circle {
-  width: 80px; /* Kleiner gemaakt zodat het mooier in de header past */
-  height: 80px;
-}
 
 /* Groei */
 .growth-value {

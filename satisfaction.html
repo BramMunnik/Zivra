@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="status.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+    <h2>Tevredenheid & Welzijn</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Laatste Score</span>
+            <span id="current-mood" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Verschil sessie</span>
+            <span id="mood-diff" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Totaal traject</span>
+            <span id="mood-trend" class="stat-value">-</span>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-header">
+            <h3>Subjectieve Stemming over de sessies</h3>
+        </div>
+        
+        <div class="controls">
+            <label class="checkbox-container mood-label">
+                <input type="checkbox" id="toggle-mood" checked> Tevredenheid
+            </label>
+            <label class="checkbox-container energy-label">
+                <input type="checkbox" id="toggle-energy"> Energie
+            </label>
+            <label class="checkbox-container pain-label">
+                <input type="checkbox" id="toggle-pain"> Pijn
+            </label>
+        </div>
+
+        <div id="mood-chart"></div>
+    </div>
+
+    <script src="satisfaction.js"></script>
+</body>
+</html>

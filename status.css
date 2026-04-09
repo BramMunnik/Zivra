@@ -1,0 +1,195 @@
+:root {
+    --primary: #023047;
+    --secondary: #8ecae6;
+    --accent: #219ebc;
+    --success: #2d6a4f;
+    --danger: #c94c4c;
+    --bg-light: #f1f5f9;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #fff;
+    color: var(--primary);
+    margin: 0;
+    padding: 24px;
+}
+
+h2 {
+    margin-bottom: 24px;
+    font-size: 22px;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+/* STATS CARDS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.stat-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+/* TREND INDICATORS */
+.trend-up { color: var(--success); }
+.trend-down { color: var(--danger); }
+.trend-neutral { color: #94a3b8; }
+
+/* CHART AREA */
+.chart-section {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.chart-header {
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* D3 STYLING */
+.line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.dot {
+    fill: var(--primary);
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+.grid-line line {
+    stroke: #e2e8f0;
+}
+
+.axis-text {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* ANIMATIE VOOR CARDS */
+.stat-card {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    /* Animatie settings */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards;
+}
+
+/* Staggered delay voor de kaarten (ze komen na elkaar) */
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* DASH ANIMATIE VOOR DE LIJN */
+.line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+    /* We definiëren de dash in JS voor de juiste lengte */
+}
+
+/* Kleurgebruik versterken: Hover effecten */
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    background: #fff;
+    border-color: var(--secondary);
+}
+
+/* Zones in de grafiek */
+.zone-red { fill: #ffadad; opacity: 0.2; }
+.zone-yellow { fill: #ffd6a5; opacity: 0.2; }
+.zone-green { fill: #c1ff9d; opacity: 0.2; }
+
+/* Zorg dat de stats-value altijd zichtbaar is */
+.stat-value {
+    display: block;
+    min-height: 40px;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+/* --- NIEUW: Toggles en extra lijnen --- */
+.controls {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #475569;
+}
+
+/* Accent kleuren voor de labels */
+.mood-label { color: var(--accent); }
+.energy-label { color: #f59e0b; } /* Oranje */
+.pain-label { color: #ef4444; }   /* Rood */
+
+/* Specifieke styling per datalijn */
+.line {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.line-mood { stroke: var(--accent); }
+.line-energy { stroke: #f59e0b; }
+.line-pain { stroke: #ef4444; stroke-dasharray: 8 8; /* Pijn is een stippellijn voor duidelijkheid */ }
+
+.dot-mood { fill: var(--primary); stroke: #fff; stroke-width: 2; }
+.dot-energy { fill: #d97706; stroke: #fff; stroke-width: 2; }
+.dot-pain { fill: #b91c1c; stroke: #fff; stroke-width: 2; }

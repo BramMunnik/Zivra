@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="status.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+    <h2>Pijn Analyse</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Huidige Pijnscore</span>
+            <span id="current-pain" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Verschil met vorige</span>
+            <span id="pain-diff" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Totaal verloop</span>
+            <span id="pain-trend" class="stat-value">-</span>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-header">
+            <h3>Pijnverloop over de sessies</h3>
+        </div>
+        
+        <div class="controls">
+            <label class="checkbox-container pain-label">
+                <input type="checkbox" id="toggle-pain" checked> Pijn
+            </label>
+            <label class="checkbox-container mood-label">
+                <input type="checkbox" id="toggle-mood"> Tevredenheid
+            </label>
+            <label class="checkbox-container energy-label">
+                <input type="checkbox" id="toggle-energy"> Energie
+            </label>
+        </div>
+
+        <div id="pain-chart"></div>
+    </div>
+
+    <script src="pain.js"></script>
+</body>
+</html>

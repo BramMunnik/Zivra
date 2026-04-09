@@ -70,11 +70,16 @@ body {
 /* SILHOUET PLACEHOLDER */
 .silhouette {
   height: 400px;
-  background: black;
-  border-radius: 8px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none; /* verwijder zwarte achtergrond */
 }
 
+.silhouette svg {
+  height: 100%;
+  width: auto;
+}
 /* ARM CIRCLES */
 .silhouette::before,
 .silhouette::after {

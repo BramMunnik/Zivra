@@ -15,7 +15,7 @@
 <div class="dashboard">
 
   <!-- Links -->
-  <div class="tile physical">
+  <div class="tile physical" onclick="openOverlay('physical')">
     <h2>Fysieke staat</h2>
     <div class="silhouette">
       <svg xmlns="http://www.w3.org/2000/svg" width="630" height="806" viewBox="0 0 630 806" fill="none">
@@ -26,7 +26,7 @@
   </div>
 
   <!-- Midden boven -->
-  <div class="tile growth">
+  <div class="tile growth" onclick="openOverlay('growth')">
     <h2>Totale groei</h2>
     <div class="growth-value">67%</div>
     <p>Sinds begin traject</p>
@@ -41,19 +41,19 @@
     <svg class="progression-circle"></svg>
   </div>
 
-  <div class="tile satisfaction mood-tile">
+  <div class="tile satisfaction mood-tile" onclick="openOverlay('satisfaction')">
     <h3>Tevredenheid</h3>
     <svg class="mood-image" viewBox="0 0 100 100"></svg>
     <div id="mood" class="score"></div>
   </div>
 
-  <div class="tile energy mood-tile">
+  <div class="tile energy mood-tile" onclick="openOverlay('energy')">
     <h3>Energieniveau</h3>
     <svg class="mood-image" viewBox="0 0 100 100"></svg>
     <div id="energy-level" class="score">5/10</div>
   </div>
 
-  <div class="tile pain mood-tile">
+  <div class="tile pain mood-tile" onclick="openOverlay('pain')">
     <h3>Pijnscore</h3>
     <svg class="mood-image" viewBox="0 0 100 100">
         <img>
@@ -67,7 +67,8 @@
   <div class="overlay-panel">
     <button class="overlay-close" onclick="closeOverlay()">✕</button>
     <div class="overlay-title" id="overlay-title"></div>
-    <div class="overlay-body" id="overlay-body"></div>
+    <iframe id="overlay-iframe" src="" frameborder="0" style="width:100%; height:100%;"></iframe>
+    <div class="overlay-body" id="overlay-body" style="display:none;"></div>
   </div>
 </div>
 

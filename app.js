@@ -169,7 +169,7 @@ progressCircle.append("text")
   .attr("dy", "1.2em")
   .style("font-size", "10px")
   .style("fill", "green")
-  .text("voltooid");
+  .text("Sessies Voltooid");
 
 // inhoud tile
 const overlayContent = {

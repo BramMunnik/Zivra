@@ -41,8 +41,7 @@ body {
 
 .profile {
   grid-row: 1;
-  display: flex;
-
+  display: flex;  
   justify-content: space-between;
 }
 
@@ -145,6 +144,10 @@ body {
 
 .pain {
   background: #f4978e;
+}
+
+.progression-circle{
+  width: 200px;
 }
 
 /* TILE hover feedback */

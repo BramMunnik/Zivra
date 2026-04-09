@@ -123,7 +123,7 @@ if (pain < 5) {
 // Update de <img> src
 d3.select(".pain img")
   .attr("src",selectedGif)
-  .style("margin-right", "65px")
+  .style("center")
 
 //Weekly-progress circle
 const width = 200;

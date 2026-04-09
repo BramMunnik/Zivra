@@ -33,7 +33,7 @@
   </div>
 
   <!-- Rechts boven -->
-  <div class="tile profile">
+  <div class="tile profile" onclick="openOverlay('profile')">
     <div class="profile-header">
       <div class="avatar"></div>
       <h3>Jan Jansen</h3>
@@ -70,6 +70,15 @@
     <svg></svg>
   </div>
 
+</div>
+
+<!--weg klikken van tile-->
+<div class="overlay-backdrop" id="overlay" onclick="closeOnBackdrop(event)">
+  <div class="overlay-panel">
+    <button class="overlay-close" onclick="closeOverlay()">✕</button>
+    <div class="overlay-title" id="overlay-title"></div>
+    <div class="overlay-body" id="overlay-body"></div>
+  </div>
 </div>
 
 <script src="app.js"></script>

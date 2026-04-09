@@ -1,0 +1,218 @@
+/* --- BASIS THEMA --- */
+body {
+  margin: 0px;
+  font-family: sans-serif;
+}
+
+.dashboard-overview {
+  padding: 40px;
+  max-width: 1250px; /* breed genoeg voor 6 rijen */
+  margin-left: auto;
+  margin-right: auto; /* in het midden zetten */
+  color: #333;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+  color: #1a3c4f; 
+}
+
+/* Knoppen en zoeken rechtsboven */
+.top-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.control-badge {
+  display: flex;
+  align-items: center;
+  background: #8ecae6; 
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(142, 202, 230, 0.4); 
+}
+
+.badge-number {
+  margin: 0 8px;
+  font-size: 18px;
+}
+
+.control-search {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(142, 202, 230, 0.1);
+  border: 1px solid #e0f0f8; 
+  transition: all 0.3s ease;
+}
+
+.control-search:focus-within {
+  border-color: #8ecae6;
+  box-shadow: 0 2px 12px rgba(142, 202, 230, 0.25);
+}
+
+.control-search input {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  margin-left: 10px;
+  width: 150px;
+  font-family: inherit;
+  color: #444;
+}
+
+/* extra fix voor filter styling */
+.control-filter select {
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(142, 202, 230, 0.1);
+  border: 1px solid #e0f0f8;
+  font-size: 16px;
+  color: #444;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* haalt default pijl weg */
+}
+
+/* --- TABEL --- */
+.patient-table-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(142, 202, 230, 0.12); 
+  border: 1px solid #eef6fa;
+  overflow: hidden;
+}
+
+.table-header, .table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.2fr 1fr 1fr 1fr; 
+  align-items: center;
+  padding: 20px 30px;
+  gap: 10px;
+}
+
+.table-header {
+  background: #f0f7fb; 
+  font-weight: 600;
+  font-size: 14px;
+  color: #5b8a9e;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e3f1f8;
+}
+
+.table-row {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid #f2f8fc;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+/* styling als je er met muis over gaat */
+.table-row:hover {
+  background-color: #f7fbfe; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(142, 202, 230, 0.08);
+  position: relative;
+  z-index: 99; /* z-index voor de zekerheid toegevoegd */
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.mini-avatar {
+  width: 40px;
+  height: 40px;
+  background: #8ecae6; 
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.patient-name {
+  font-weight: 600;
+  font-size: 17px;
+  color: #2b4c5e;
+}
+
+.session-info {
+  color: #6a8c9e;
+  font-weight: 500;
+}
+
+.voortgang-grafiek {
+  width: 100px;
+}
+
+/* badges voor de scores */
+.score-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  padding: 6px 0;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.badge-good {
+  background: #b7e4c7; 
+  color: #1b5e20;
+}
+
+.badge-neutral {
+  background: #f4c27a; 
+  color: #8d6e32;
+}
+
+.badge-bad {
+  background: #f4978e; 
+  color: #9c2b22;
+}
+
+/* --- EXTRA VOOR SORTEREN --- */
+.sortable {
+  cursor: pointer;
+  user-select: none; /* voorkomt dat tekst lelijk blauw wordt als je snel dubbelklikt */
+  transition: color 0.2s;
+}
+
+.sortable:hover {
+  color: #1a3c4f; /* word iets donkerder bij hover */
+}
+
+.arrow {
+  font-size: 10px;
+  margin-left: 4px;
+  color: #8ecae6;
+}

@@ -83,9 +83,30 @@ battery.append("rect")
    .attr("y", fillY)
 
 // Pain tile
-const pain = 3
+const pain = 5
 d3.select("#pain-level").text(`${pain}/10`)
-d3.select(".energy").style("background-color", colorScale(pain))
+d3.select(".pain").style("background-color", colorScale(10 - pain))
+
+const gifs = {
+  low: "./img/static-cloud.png",     // <5
+  medium: "./img/rain-cloud.gif",    // 5–7
+  high: "./img/storm-cloud.gif"    // >7
+};
+
+// Logica om GIF te kiezen
+let selectedGif;
+if (pain < 5) {
+  selectedGif = gifs.low;
+} else if (pain < 7) {
+  selectedGif = gifs.medium;
+} else {
+  selectedGif = gifs.high;
+}
+
+// Update de <img> src
+d3.select(".pain img")
+  .attr("src",selectedGif)
+  .style("margin-right", "65px")
 
 //Weekly-progress circle
 const width = 200;

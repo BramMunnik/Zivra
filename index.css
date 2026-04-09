@@ -203,6 +203,13 @@ a{
   transform: scale(0.92);
   transition: transform 0.2s;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+#overlay-iframe {
+  flex-grow: 1; /* Zorgt dat het iframe alle resterende ruimte vult */
+  border-radius: 8px;
 }
 
 .overlay-backdrop.active .overlay-panel {

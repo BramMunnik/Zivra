@@ -169,4 +169,39 @@ progressCircle.append("text")
   .attr("dy", "1.2em")
   .style("font-size", "10px")
   .style("fill", "green")
-  .text("sessies voltooid deze week");
+  .text("voltooid");
+
+// inhoud tile
+const overlayContent = {
+  
+  profile: {
+    title: "Patiëntprofiel",
+    html: `
+      <p>Naam: Jan Jansen</p>
+      <p>Geboortedatum: 03-08-1968</p>
+      <p>CVA-datum: 12 oktober 2025</p>
+      <p>Aangedane zijde: Links (hemiplegie)</p>
+    `
+  }
+};
+
+// overlay functie
+function openOverlay(key) {
+  const c = overlayContent[key];
+  if (!c) return;
+  document.getElementById('overlay-title').textContent = c.title;
+  document.getElementById('overlay-body').innerHTML = c.html;
+  document.getElementById('overlay').classList.add('active');
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('active');
+}
+
+function closeOnBackdrop(e) {
+  if (e.target === document.getElementById('overlay')) closeOverlay();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeOverlay();
+});

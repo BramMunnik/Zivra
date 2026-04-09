@@ -173,15 +173,17 @@ progressCircle.append("text")
 
 // inhoud tile
 const overlayContent = {
-  
   profile: {
-    title: "Patiëntprofiel",
-    html: `
-      <p>Naam: Jan Jansen</p>
-      <p>Geboortedatum: 03-08-1968</p>
-      <p>CVA-datum: 12 oktober 2025</p>
-      <p>Aangedane zijde: Links (hemiplegie)</p>
-    `
+    title: "Patiëntprofiel & Analyse",
+    url: "profile_details.html" // De pagina die je in het iframe wilt laden
+  },
+  physical: {
+    title: "Gedetailleerde Fysieke Analyse",
+    url: "physical_charts.html"
+  },
+  growth: {
+    title: "Groei Grafieken",
+    url: "growth_d3.html"
   }
 };
 
@@ -189,13 +191,21 @@ const overlayContent = {
 function openOverlay(key) {
   const c = overlayContent[key];
   if (!c) return;
+
+  const iframe = document.getElementById('overlay-iframe');
+  
   document.getElementById('overlay-title').textContent = c.title;
-  document.getElementById('overlay-body').innerHTML = c.html;
+  
+  // Zet de URL van het iframe
+  iframe.src = c.url;
+  
   document.getElementById('overlay').classList.add('active');
 }
 
+// 3. Reset het iframe bij sluiten (optioneel, voor betere performance)
 function closeOverlay() {
   document.getElementById('overlay').classList.remove('active');
+  document.getElementById('overlay-iframe').src = ""; 
 }
 
 function closeOnBackdrop(e) {

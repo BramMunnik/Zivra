@@ -1,5 +1,22 @@
 
 
+
+//total progress count-up animation
+const totalProgress = 75;
+const duration = 1000;
+
+const display = d3.select(".growth-value");
+
+display.transition()
+  .duration(duration)
+  .ease(d3.easeCubicOut)
+  .tween("text", function() {
+    const i = d3.interpolateNumber(0, totalProgress);
+    return function(t) {
+      this.textContent = `${Math.round(i(t))}%`;
+    };
+  });
+
 //color scale for modular backgrounds
 const colorScale = d3.scaleLinear()
     .domain([0, 5, 10])

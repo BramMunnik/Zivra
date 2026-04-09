@@ -2,12 +2,44 @@ body {
   margin: 0;
   font-family: sans-serif;
   background: #f5f5f5;
+  zoom: 1; /* default 100% */
+}
+
+/* Large 27" monitor */
+@media (min-width: 2500px) {
+  body {
+    zoom: 1.5; /* 150% */
+  }
+}
+
+@media (max-width: 1920px){
+  body{
+    zoom: 0.75;
+  }
+}
+
+a{
+  text-decoration: none;
+  color:#222
 }
 
 .topbar {
   background: #8ecae6;
   padding: 12px 20px;
   font-weight: bold;
+  height: 25px;
+}
+
+.backbutton{
+  position:absolute;
+  height: 25px;
+  padding: 12px 20px;
+  top: 0;
+  left: 0;
+}
+
+.backbutton:hover{
+  background-color: #4c8ead;
 }
 
 /* GRID */
@@ -17,7 +49,6 @@ body {
   grid-template-rows: auto auto auto auto;
   gap: 16px;
   padding: 16px;
-  zoom: 150%;
 }
 
 /* TILE BASE */
@@ -89,23 +120,6 @@ body {
   position: absolute;
   border-radius: 50%;
 }
-
-.silhouette::before {
-  width: 40px;
-  height: 40px;
-  background: green;
-  right: 20px;
-  top: 80px;
-}
-
-.silhouette::after {
-  width: 40px;
-  height: 40px;
-  background: red;
-  right: 10px;
-  bottom: 80px;
-}
-
 /* GROWTH */
 .growth-value {
   font-size: 64px;

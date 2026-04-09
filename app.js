@@ -92,8 +92,8 @@ const width = 200;
 const height = 200;
 const radius = 80;
 
-const current = 4
-const total = 5
+const current = 6
+const total = 7
 const progress =  current / total
 
 const progressCircle = d3.select(".profile svg")

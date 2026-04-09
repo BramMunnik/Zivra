@@ -105,12 +105,11 @@ d3.select("#pain-level").text(`${pain}/10`)
 d3.select(".pain").style("background-color", colorScale(10 - pain))
 
 const gifs = {
-  low: "./img/static-cloud.png",     // <5
-  medium: "./img/rain-cloud.gif",    // 5–7
-  high: "./img/storm-cloud.gif"    // >7
+  low: "./img/static-cloud.png",
+  medium: "./img/rain-cloud.gif",
+  high: "./img/storm-cloud.gif"
 };
 
-// Logica om GIF te kiezen
 let selectedGif;
 if (pain < 5) {
   selectedGif = gifs.low;
@@ -120,7 +119,6 @@ if (pain < 5) {
   selectedGif = gifs.high;
 }
 
-// Update de <img> src
 d3.select(".pain img")
   .attr("src",selectedGif)
   .style("center")
@@ -129,26 +127,26 @@ d3.select(".pain img")
 const overlayContent = {
   physical: {
     title: "Fysieke staat",
-    url: "physical.html" // De pagina die je in het iframe wilt laden
+    url: "physical.html"
   },
   growth: {
     title: "Totale groei",
-    url: "growth.html" // De pagina die je in het iframe wilt laden
+    url: "growth.html"
   },
   profile: {
     title: "Jan Jansen",
-    url: "profile.html" // De pagina die je in het iframe wilt laden
+    url: "profile.html"
   },
   satisfaction: {
-    url: "satisfaction.html" // De pagina die je in het iframe wilt laden
+    url: "satisfaction.html"
   },
   energy: {
     title: "Energieniveau",
-    url: "energy.html" // De pagina die je in het iframe wilt laden
+    url: "energy.html"
   },
   pain: {
     title: "Pijnscore",
-    url: "pain.html" // De pagina die je in het iframe wilt laden
+    url: "pain.html"
   },
 };
 
@@ -187,10 +185,8 @@ d3.json("mockData.json").then(data => {
   allSessions = data.sessions;
   if (!allSessions || allSessions.length === 0) return;
 
-  // Start altijd bij de meest recente sessie
   currentIndex = allSessions.length - 1; 
-  
-  // Voeg event listeners toe aan knoppen
+
   document.getElementById("btn-prev").addEventListener("click", () => {
     if (currentIndex > 0) {
       currentIndex--;
@@ -205,7 +201,6 @@ d3.json("mockData.json").then(data => {
     }
   });
 
-  // Eerste keer inladen
   renderDashboard();
 
 }).catch(err => {
@@ -218,14 +213,11 @@ function renderDashboard() {
   const currentSession = allSessions[currentIndex];
   const firstSession = allSessions[0];
 
-  // 1. UPDATE TIJDLIJN UI
   document.getElementById("session-title").textContent = `Sessie ${currentSession.sessionId}`;
   
-  // Format de datum (bijv. "11 apr 2026")
   const dateObj = new Date(currentSession.date);
   document.getElementById("session-date").textContent = dateObj.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
 
-  // Update knoppen (uitschakelen als we niet verder kunnen)
   document.getElementById("btn-prev").disabled = (currentIndex === 0);
   document.getElementById("btn-next").disabled = (currentIndex === allSessions.length - 1);
 
@@ -244,13 +236,13 @@ function renderDashboard() {
   // 3. DYNAMISCHE KLEUREN
   function getStatusColor(score, isPain = false) {
     if (isPain) {
-      if (score < 5) return "#10b981"; // Groen (weinig pijn is goed)
-      if (score < 7) return "#f59e0b"; // Oranje
-      return "#ef4444"; // Rood (veel pijn is slecht)
+      if (score < 5) return "#10b981";
+      if (score < 7) return "#f59e0b"; 
+      return "#ef4444";
     } else {
-      if (score >= 7) return "#10b981"; // Groen
-      if (score >= 5) return "#f59e0b"; // Oranje
-      return "#ef4444"; // Rood
+      if (score >= 7) return "#10b981";
+      if (score >= 5) return "#f59e0b";
+      return "#ef4444";
     }
   }
 
@@ -259,12 +251,11 @@ function renderDashboard() {
   d3.select(".pain").style("border-top", `4px solid ${getStatusColor(pain, true)}`).style("background-color", `${getStatusColor(pain, true)}1A`);
 
   // 4. TOTALE GROEI
-  // We gebruiken geen transities bij het klikken om wachttijden te voorkomen, direct instant feedback is beter voor navigatie.
   d3.select(".growth-value").text(totalProgress >= 0 ? `+${totalProgress}%` : `${totalProgress}%`);
 
-  // 5. TEVREDENHEID (SMILEY)
+  // 5. TEVREDENHEID
   const smiley = d3.select(".satisfaction svg");
-  smiley.html(""); // Maak oude SVG leeg
+  smiley.html("");
   d3.select("#mood").text(`${mood}/10`);
   
   smiley.append("circle").attr("cx", 50).attr("cy", 50).attr("r", 45).attr("fill", "none").attr("stroke", "#023047").attr("stroke-width", 5);
@@ -274,9 +265,9 @@ function renderDashboard() {
   const curve = (mood - 5) * -2;
   smiley.append("path").attr("d", `M30,65 Q50,${65 - curve} 70,65`).attr("stroke", "#023047").attr("stroke-width", 4).attr("fill", "transparent");
 
-  // 6. ENERGIENIVEAU (BATTERIJ)
+  // 6. ENERGIENIVEAU
   const battery = d3.select(".energy svg");
-  battery.html(""); // Maak oude SVG leeg
+  battery.html("");
   d3.select("#energy-level").text(`${charge}/10`);
   
   battery.append("rect").attr("x", 25).attr("y", 10).attr("width", 50).attr("height", 80).attr("rx", 4).attr("ry", 4).attr("fill", "none").attr("stroke", "#023047").attr("stroke-width", 5);
@@ -285,24 +276,10 @@ function renderDashboard() {
   const fillHeight = (charge / 10) * 70;
   battery.append("rect").attr("x", 32).attr("y", 12 + 73 - fillHeight).attr("width", 36).attr("height", fillHeight).attr("rx", 2).attr("ry", 2).attr("fill", getStatusColor(charge, false));
 
-  // 7. PIJN (GIF)
+  // 7. PIJN
   d3.select("#pain-level").text(`${pain}/10`);
   const gifs = { low: "./img/static-cloud.png", medium: "./img/rain-cloud.gif", high: "./img/storm-cloud.gif" };
   let selectedGif = pain < 5 ? gifs.low : (pain < 7 ? gifs.medium : gifs.high);
   d3.select(".pain img").attr("src", selectedGif).style("margin", "0 auto");
 
-  // 8. PROFIEL PROGRESSIE (CIRKEL)
-  const width = 200, height = 200, radius = 80;
-  const progress = completedSessions / totalTrackSessions;
-
-  const progressCircle = d3.select(".profile svg");
-  progressCircle.html(""); // Maak oude SVG leeg
-  
-  const g = progressCircle.attr("viewBox", `0 0 ${width} ${height}`).append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-  g.append("path").attr("d", d3.arc().innerRadius(radius - 10).outerRadius(radius).startAngle(0).endAngle(2 * Math.PI)).attr("fill", "#e2e8f0");
-  g.append("path").attr("d", d3.arc().innerRadius(radius - 10).outerRadius(radius).startAngle(0).endAngle(2 * Math.PI * progress)).attr("fill", "#219ebc");
-
-  g.append("text").attr("text-anchor", "middle").attr("dy", "-0.2em").style("font-size", "32px").style("font-weight", "800").style("fill", "#023047").text(`${completedSessions}/${totalTrackSessions}`);
-  g.append("text").attr("text-anchor", "middle").attr("dy", "1.5em").style("font-size", "12px").style("fill", "#64748b").style("font-weight", "600").text("Sessies");
-}
+  }

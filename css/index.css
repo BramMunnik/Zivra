@@ -1,4 +1,3 @@
-/* --- BASIS THEMA --- */
 body {
   margin: 0px;
   font-family: sans-serif;
@@ -7,9 +6,9 @@ body {
 
 .dashboard-overview {
   padding: 40px;
-  max-width: 1250px; /* breed genoeg voor 6 rijen */
+  max-width: 1250px;
   margin-left: auto;
-  margin-right: auto; /* in het midden zetten */
+  margin-right: auto;
   color: #333;
 }
 
@@ -29,7 +28,6 @@ body {
   color: #1a3c4f; 
 }
 
-/* Knoppen en zoeken rechtsboven */
 .top-controls {
   display: flex;
   gap: 16px;
@@ -79,7 +77,6 @@ body {
   color: #444;
 }
 
-/* extra fix voor filter styling */
 .control-filter select {
   background: #ffffff;
   padding: 10px 20px;
@@ -90,7 +87,7 @@ body {
   color: #444;
   outline: none;
   cursor: pointer;
-  appearance: none; /* haalt default pijl weg */
+  appearance: none;
 }
 
 /* --- TABEL --- */
@@ -131,13 +128,12 @@ body {
   border-bottom: none;
 }
 
-/* styling als je er met muis over gaat */
 .table-row:hover {
   background-color: #f7fbfe; 
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(142, 202, 230, 0.08);
   position: relative;
-  z-index: 99; /* z-index voor de zekerheid toegevoegd */
+  z-index: 99;
 }
 
 .patient-info {
@@ -201,15 +197,15 @@ body {
   color: #9c2b22;
 }
 
-/* --- EXTRA VOOR SORTEREN --- */
+/* --- SORTEREN --- */
 .sortable {
   cursor: pointer;
-  user-select: none; /* voorkomt dat tekst lelijk blauw wordt als je snel dubbelklikt */
+  user-select: none;
   transition: color 0.2s;
 }
 
 .sortable:hover {
-  color: #1a3c4f; /* word iets donkerder bij hover */
+  color: #1a3c4f;
 }
 
 .arrow {

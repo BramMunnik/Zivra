@@ -111,7 +111,6 @@ h2 {
     animation: slideUp 0.5s ease forwards;
 }
 
-/* Staggered delay voor de kaarten (ze komen na elkaar) */
 .stat-card:nth-child(1) { animation-delay: 0.1s; }
 .stat-card:nth-child(2) { animation-delay: 0.2s; }
 .stat-card:nth-child(3) { animation-delay: 0.3s; }
@@ -129,10 +128,8 @@ h2 {
     stroke: var(--accent);
     stroke-width: 4;
     stroke-linecap: round;
-    /* We definiëren de dash in JS voor de juiste lengte */
 }
 
-/* Kleurgebruik versterken: Hover effecten */
 .stat-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
@@ -140,12 +137,10 @@ h2 {
     border-color: var(--secondary);
 }
 
-/* Zones in de grafiek */
 .zone-red { fill: #ffadad; opacity: 0.2; }
 .zone-yellow { fill: #ffd6a5; opacity: 0.2; }
 .zone-green { fill: #c1ff9d; opacity: 0.2; }
 
-/* Zorg dat de stats-value altijd zichtbaar is */
 .stat-value {
     display: block;
     min-height: 40px;
@@ -153,7 +148,6 @@ h2 {
     font-weight: 800;
 }
 
-/* --- NIEUW: Toggles en extra lijnen --- */
 .controls {
     display: flex;
     gap: 24px;
@@ -174,12 +168,10 @@ h2 {
     color: #475569;
 }
 
-/* Accent kleuren voor de labels */
 .mood-label { color: var(--accent); }
-.energy-label { color: #f59e0b; } /* Oranje */
-.pain-label { color: #ef4444; }   /* Rood */
+.energy-label { color: #f59e0b; }
+.pain-label { color: #ef4444; }
 
-/* Specifieke styling per datalijn */
 .line {
     fill: none;
     stroke-width: 4;
@@ -188,7 +180,7 @@ h2 {
 
 .line-mood { stroke: var(--accent); }
 .line-energy { stroke: #f59e0b; }
-.line-pain { stroke: #ef4444; stroke-dasharray: 8 8; /* Pijn is een stippellijn voor duidelijkheid */ }
+.line-pain { stroke: #ef4444; stroke-dasharray: 8 8; }
 
 .dot-mood { fill: var(--primary); stroke: #fff; stroke-width: 2; }
 .dot-energy { fill: #d97706; stroke: #fff; stroke-width: 2; }

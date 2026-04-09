@@ -2,10 +2,6 @@ d3.json("mockData.json").then(data => {
     const sessions = data.sessions;
     if (!sessions || sessions.length < 1) return;
 
-    // --- 1 & 2 & 3 blijven hetzelfde (Statistieken, Setup, Kleurzones) ---
-    // ... [Houd je bestaande code voor stats en setup hier] ...
-    
-    // (Voor de volledigheid, hier is de setup vanaf het genereren van de assen)
     const margin = {top: 20, right: 30, bottom: 40, left: 40};
     const width = 600 - margin.left - margin.right;
     const height = 250 - margin.top - margin.bottom;
@@ -27,22 +23,19 @@ d3.json("mockData.json").then(data => {
 
     // --- 4. DATA LIJNEN GENEREREN ---
     
-    // Line Generators voor de 3 metrics
+
     const lineMood = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.mood)).curve(d3.curveMonotoneX);
     const lineEnergy = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.energy)).curve(d3.curveMonotoneX);
     const linePain = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.pain)).curve(d3.curveMonotoneX);
 
-    // Groepen maken om makkelijk aan/uit te zetten
     const groupMood = svg.append("g").attr("id", "group-mood");
-    const groupEnergy = svg.append("g").attr("id", "group-energy").style("opacity", 0); // Standaard uit
-    const groupPain = svg.append("g").attr("id", "group-pain").style("opacity", 0);     // Standaard uit
+    const groupEnergy = svg.append("g").attr("id", "group-energy").style("opacity", 0);
+    const groupPain = svg.append("g").attr("id", "group-pain").style("opacity", 0);    
 
-    // Tevredenheid (Mood) Tekenen
     const pathMood = groupMood.append("path").datum(sessions).attr("class", "line line-mood").attr("d", lineMood);
     groupMood.selectAll(".dot-mood").data(sessions).enter().append("circle").attr("class", "dot-mood").attr("cx", d => x(d.sessionId)).attr("cy", d => y(d.subjective.mood)).attr("r", 0)
         .transition().delay((d, i) => 1000 + (i * 100)).duration(400).attr("r", 6);
 
-    // Animatie alleen voor Mood bij laden
     const totalLength = pathMood.node().getTotalLength();
     pathMood.attr("stroke-dasharray", totalLength + " " + totalLength).attr("stroke-dashoffset", totalLength)
         .transition().duration(1500).attr("stroke-dashoffset", 0);
@@ -60,7 +53,7 @@ d3.json("mockData.json").then(data => {
     svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis-text");
 
 
-    // --- 5. INTERACTIVITEIT (Checkboxes) ---
+    // --- 5. INTERACTIVITEIT ---
     
     d3.select("#toggle-mood").on("change", function() {
         const isChecked = d3.select(this).property("checked");
@@ -77,7 +70,6 @@ d3.json("mockData.json").then(data => {
         groupPain.transition().duration(300).style("opacity", isChecked ? 1 : 0);
     });
 
-    // --- Statistieken updaten bovenaan (jouw bestaande code) ---
     const last = sessions[sessions.length - 1];
     const prev = sessions.length > 1 ? sessions[sessions.length - 2] : last;
     const first = sessions[0];

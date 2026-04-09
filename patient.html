@@ -15,7 +15,6 @@
 
 <div class="dashboard">
 
-  <!-- Links -->
   <div class="tile physical" onclick="openOverlay('physical')">
     <h2>Fysieke staat</h2>
     <div class="silhouette">
@@ -26,7 +25,6 @@
     </div>
   </div>
 
-  <!-- Midden boven -->
 <div class="tile growth" onclick="openOverlay('growth')">
     <h2>Totale groei</h2>
     <div class="growth-value">0%</div>
@@ -45,7 +43,6 @@
     </div>
   </div>
 
-  <!-- Rechts boven -->
   <div class="tile profile" onclick="openOverlay('profile')">
     <div class="profile-header">
       <div class="avatar"></div>
@@ -72,9 +69,6 @@
   </div>
 </div>
 
-
-
-<!--weg klikken van tile-->
 <div class="overlay-backdrop" id="overlay" onclick="closeOnBackdrop(event)">
   <div class="overlay-panel">
     <button class="overlay-close" onclick="closeOverlay()">✕</button>

@@ -2,11 +2,11 @@
   --primary: #023047;
   --secondary: #8ecae6;
   --accent: #219ebc;
-  --bg-color: #dae1e6; /* Zachtere achtergrond */
+  --bg-color: #dae1e6;
   --card-bg: #ffffff;
   --text-main: #334155;
   --text-muted: #64748b;
-  --border-radius: 20px; /* Modernere, rondere hoeken */
+  --border-radius: 20px;
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
@@ -19,17 +19,15 @@ body {
   zoom: 1; 
 }
 
-/* Responsieve Zoom */
+/* Responsive Zoom */
 @media (min-width: 2500px) { body { zoom: 1.5; } }
-@media (max-width: 1920px) { body { zoom: 0.85; } } /* Iets minder agressief inzoomen dan 0.75 */
-
+@media (max-width: 1920px) { body { zoom: 0.75; } } 
 a {
   text-decoration: none;
   color: var(--primary);
   font-weight: 600;
 }
 
-/* --- TOPBAR --- */
 .topbar {
   background: #ffffff;
   padding: 16px 24px;
@@ -63,10 +61,10 @@ a {
   margin: 0 auto;
 }
 
-/* --- TILE BASE (MODERN CARDS) --- */
+/* --- TILE BASE --- */
 .tile {
   background: var(--card-bg);
-  border: 1px solid #f1f5f9; /* Subtiele border in plaats van hard zwart */
+  border: 1px solid #f1f5f9;
   border-radius: var(--border-radius);
   padding: 24px;
   box-shadow: var(--shadow);
@@ -92,7 +90,7 @@ a {
   border-color: #e2e8f0;
 }
 
-/* --- TILE POSITIES --- */
+/* --- TILE POSITIONS --- */
 .physical { grid-column: 2 / span 2; grid-row: 1 / span 3; text-align: center; }
 .growth { grid-column: 1; align-items: center; justify-content: center; }
 .profile { grid-column: 1; grid-row: 1; flex-direction: row; align-items: center; justify-content: space-between; }
@@ -127,12 +125,12 @@ a {
   font-weight: bold;
   font-size: 24px;
 }
-.avatar::after { content: "JJ"; } /* Initialen toevoegen */
+.avatar::after { content: "JJ"; }
 
 /* Groei */
 .growth-value {
   font-size: 72px;
-  color: #10b981; /* Modern groen */
+  color: #10b981;
   font-weight: 800;
   line-height: 1;
   margin: 20px 0 8px 0;
@@ -157,16 +155,12 @@ a {
 .silhouette svg {
   height: 100%;
   width: auto;
-  opacity: 0.85; /* Maakt de zwarte svg iets zachter */
+  opacity: 0.85;
 }
 
-/* Stemming Tegels (Kleur op basis van categorie) */
 .mood-tile {
   text-align: center;
 }
-
-/* Zorg dat de JavaScript background-colors dit niet overrulen in d3 */
-/* (Je kunt in app.js de regel d3.select(".satisfaction").style("background-color"...) verwijderen voor het mooiste effect) */
 
 .mood-image {
   width: 70px;
@@ -179,12 +173,11 @@ a {
   color: var(--primary);
 }
 
-/* --- OVERLAY (POPUP) --- */
+/* --- OVERLAY --- */
 .overlay-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6); /* Donkerdere, chiquere backdrop */
-  backdrop-filter: blur(4px); /* Blur effect op de achtergrond */
+  background: rgba(15, 23, 42,);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -207,7 +200,7 @@ a {
   height: 85%;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   transform: scale(0.95) translateY(20px);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy effect */
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
 }

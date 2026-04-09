@@ -125,69 +125,6 @@ d3.select(".pain img")
   .attr("src",selectedGif)
   .style("center")
 
-//Weekly-progress circle
-const width = 200;
-const height = 200;
-const radius = 80;
-
-const current = 6
-const total = 7
-const progress =  current / total
-
-const progressCircle = d3.select(".profile svg")
-  .attr("viewBox", `0 0 ${width} ${height}`)
-  .append("g")
-  .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-
-const backgroundArc = d3.arc()
-  .innerRadius(radius - 10)
-  .outerRadius(radius)
-  .startAngle(0)
-  .endAngle(2 * Math.PI);
-
-progressCircle.append("path")
-  .attr("d", backgroundArc)
-  .attr("fill", "#ccc");
-
-
-const arc = d3.arc()
-  .innerRadius(radius - 10)
-  .outerRadius(radius)
-  .startAngle(0);
-
-
-const foreground = progressCircle.append("path")
-  .datum({ endAngle: 0 })
-  .attr("fill", "#1e90ff");
-
-
-foreground.transition()
-  .duration(1000)
-  .attrTween("d", function(d) {
-    const interpolate = d3.interpolate(d.endAngle, 2 * Math.PI * progress);
-    return function(t) {
-      d.endAngle = interpolate(t);
-      return arc(d);
-    };
-  });
-
-
-progressCircle.append("text")
-  .attr("text-anchor", "middle")
-  .attr("dy", "-0.2em")
-  .style("font-size", "24px")
-  .style("fill", "green")
-  .text(`${current}/${total}`);
-
-
-progressCircle.append("text")
-  .attr("text-anchor", "middle")
-  .attr("dy", "1.2em")
-  .style("font-size", "10px")
-  .style("fill", "green")
-  .text("Sessies Voltooid");
-
 // inhoud tile
 const overlayContent = {
   physical: {

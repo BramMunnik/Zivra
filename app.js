@@ -88,7 +88,6 @@ d3.select("#pain-level").text(`${pain}/10`)
 d3.select(".energy").style("background-color", colorScale(pain))
 
 //Weekly-progress circle
-
 const width = 200;
 const height = 200;
 const radius = 80;
@@ -97,7 +96,7 @@ const current = 4
 const total = 5
 const progress =  current / total
 
-const progressCircle = d3.select(".exercises svg")
+const progressCircle = d3.select(".profile svg")
   .attr("viewBox", `0 0 ${width} ${height}`)
   .append("g")
   .attr("transform", `translate(${width / 2}, ${height / 2})`);
@@ -147,6 +146,6 @@ progressCircle.append("text")
 progressCircle.append("text")
   .attr("text-anchor", "middle")
   .attr("dy", "1.2em")
-  .style("font-size", "16px")
+  .style("font-size", "10px")
   .style("fill", "green")
-  .text("voltooid");
+  .text("sessies voltooid deze week");

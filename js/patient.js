@@ -1,6 +1,3 @@
-
-
-
 //total progress count-up animation
 const totalProgress = 75;
 const duration = 1000;
@@ -211,6 +208,7 @@ d3.json("mockData.json").then(data => {
 // --- DASHBOARD RENDER FUNCTIE ---
 function renderDashboard() {
   const currentSession = allSessions[currentIndex];
+  const prevSession = allSessions[currentIndex - 1]
   const firstSession = allSessions[0];
 
   document.getElementById("session-title").textContent = `Sessie ${currentSession.sessionId}`;
@@ -256,7 +254,7 @@ function renderDashboard() {
   // 5. TEVREDENHEID
   const smiley = d3.select(".satisfaction svg");
   smiley.html("");
-  d3.select("#mood").text(`${mood}/10`);
+  const moodValDisplay = d3.select("#mood").text(`${mood}/10`);
   
   smiley.append("circle").attr("cx", 50).attr("cy", 50).attr("r", 45).attr("fill", "none").attr("stroke", "#023047").attr("stroke-width", 5);
   smiley.append("circle").attr("cx", 35).attr("cy", 40).attr("r", 5).attr("fill", "#023047");
@@ -268,7 +266,7 @@ function renderDashboard() {
   // 6. ENERGIENIVEAU
   const battery = d3.select(".energy svg");
   battery.html("");
-  d3.select("#energy-level").text(`${charge}/10`);
+  const energyValDisplay = d3.select("#energy-level").text(`${charge}/10`);
   
   battery.append("rect").attr("x", 25).attr("y", 10).attr("width", 50).attr("height", 80).attr("rx", 4).attr("ry", 4).attr("fill", "none").attr("stroke", "#023047").attr("stroke-width", 5);
   battery.append("rect").attr("x", 40).attr("y", 1).attr("width", 20).attr("height", 10).attr("rx", 2).attr("ry", 2).attr("fill", "#023047");
@@ -277,9 +275,44 @@ function renderDashboard() {
   battery.append("rect").attr("x", 32).attr("y", 12 + 73 - fillHeight).attr("width", 36).attr("height", fillHeight).attr("rx", 2).attr("ry", 2).attr("fill", getStatusColor(charge, false));
 
   // 7. PIJN
-  d3.select("#pain-level").text(`${pain}/10`);
+  const painValDisplay = d3.select("#pain-level").text(`${pain}/10`);
   const gifs = { low: "./img/static-cloud.png", medium: "./img/rain-cloud.gif", high: "./img/storm-cloud.gif" };
   let selectedGif = pain < 5 ? gifs.low : (pain < 7 ? gifs.medium : gifs.high);
   d3.select(".pain img").attr("src", selectedGif).style("margin", "0 auto");
 
+  // 8. PIJLFUNCTIE
+  function drawArrow(key, location){
+    location.selectAll("svg").remove()
+    const svg = location.append("svg")
+        .attr("width", 25)
+        .attr("height", 25)
+        .attr("viewBox", "0 0 100 100")
+        .classed("bounce", true)
+    if (!prevSession) return;
+    const prevValue = prevSession.subjective[key];
+    const currentValue = currentSession.subjective[key];
+    let improved = currentValue > prevValue;
+    if (key === 'pain') improved = currentValue < prevValue;
+    if (improved){
+      svg.append("polygon")
+        .attr("points", "50,10 90,90 10,90")
+        .attr("fill", "#10b981")
+    }
+    else if (currentValue !== prevValue){
+        svg.append("polygon")
+          .attr("points", "10,10 90,10 50,90")
+          .attr("fill", "#ef4444")
+    }
+    else{
+        svg.append("circle")
+          .attr("cx", 50)
+          .attr("cy", 50)
+          .attr("r", 20)
+          .attr("fill", "gray")
+    }
   }
+
+  drawArrow('mood', moodValDisplay)
+  drawArrow('energy', energyValDisplay)
+  drawArrow('pain', painValDisplay)
+}

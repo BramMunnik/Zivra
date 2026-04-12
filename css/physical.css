@@ -135,3 +135,39 @@
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- NIEUWE GRAFIEK STIJLEN --- */
+.area-deficit {
+    fill: #ef4444; /* Zacht rood voor het tekort */
+    opacity: 0.15;
+}
+
+.hover-line {
+    stroke: #94a3b8;
+    stroke-width: 1.5px;
+    stroke-dasharray: 4 4;
+    pointer-events: none;
+}
+
+.hover-dot {
+    stroke: #ffffff;
+    stroke-width: 2px;
+    pointer-events: none;
+}
+
+/* Verbeterde Tooltip lay-out voor meerdere waardes */
+.tooltip {
+    position: absolute;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+    z-index: 1000;
+    min-width: 130px;
+}

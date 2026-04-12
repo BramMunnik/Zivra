@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/index.css"> 
+    <link rel="stylesheet" href="/css/status.css"> 
+    <link rel="stylesheet" href="/css/physical.css">
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+    <h2>Fysieke Staat & Compensatie</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Symmetrie (L vs R)</span>
+            <span id="symmetry-score" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Rompstabiliteit (Sternum)</span>
+            <span id="posture-score" class="stat-value">-</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Risico op Compensatie</span>
+            <span id="compensation-risk" class="stat-value">-</span>
+        </div>
+    </div>
+
+    <div class="grid-2col">
+        
+        <div class="chart-box">
+            <div class="chart-title">
+                ROM Verloop: Aangedaan vs. Gezond
+                <select id="sensor-select" class="modern-select">
+                    <option value="shoulder">Schouder</option>
+                    <option value="upperArm">Bovenarm</option>
+                    <option value="lowerArm">Onderarm</option>
+                </select>
+            </div>
+            <div class="legend" style="margin-bottom: 12px;">
+                <div class="legend-item"><div class="dot dot-bad"></div> Aangedaan (Progressie)</div>
+                <div class="legend-item"><div class="dot dot-good"></div> Gezond (Doelwit)</div>
+            </div>
+            
+            <div id="rom-compare-chart" style="position: relative;"></div>
+            <div id="rom-tooltip" class="tooltip"></div>
+            
+            <div id="deep-dive" class="deep-dive-panel active">
+                <h3 id="dd-title" class="dd-title">Klinische Inzichten</h3>
+                <div class="dd-grid">
+                    <div class="dd-card">
+                        <h4>Notitie</h4>
+                        <p id="dd-note">-</p>
+                    </div>
+                    <div class="dd-card" style="text-align: center; background: #fff; border-color: #e2e8f0;">
+                        <h4>Achterstand</h4>
+                        <p id="dd-diff" style="font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 4px;">-</p>
+                    </div>
+                    <div class="dd-card">
+                        <h4>Oefenadvies</h4>
+                        <p id="dd-exercise">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <div class="chart-title">
+                Sternum Balans & Houding
+            </div>
+            <p style="font-size: 12px; color: #64748b; margin-top: -10px;">Afwijking van zwaartepunt in graden</p>
+            <div id="sternum-chart" style="display: flex; justify-content: center; position: relative; margin-top: 20px;"></div>
+            
+            <div id="sternum-tooltip" class="tooltip"></div>
+        </div>
+
+    </div>
+
+    <script src="/js/physical.js"></script>
+</body>
+</html>

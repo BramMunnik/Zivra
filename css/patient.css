@@ -102,6 +102,91 @@ a {
 /* --- TILE SPECIFICS --- */
 
 /* Profiel */
+
+.tile.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 16px;
+  border-radius: 16px;
+
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tile.profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.avatar::after { 
+  content: "JJ"; 
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 6px;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 10px;
+}
+
+.profile-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563; /* soft gray */
+}
+
+.profile-content span {
+  font-weight: 500;
+  color: #111827; /* darker label */
+  margin-right: 6px;
+}
+
+
+/* .profile{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 4px;
+}
+
 .profile-header {
   display: flex;
   align-items: center;
@@ -125,7 +210,7 @@ a {
   font-weight: bold;
   font-size: 24px;
 }
-.avatar::after { content: "JJ"; }
+.avatar::after { content: "JJ"; } */
 
 /* Groei */
 .growth-value {

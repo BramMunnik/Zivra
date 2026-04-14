@@ -189,7 +189,13 @@ d3.json("mockData.json").then(data => {
     }
   });
 
+  // inital rendor
   renderDashboard();
+  const circles = d3.selectAll(".physical circle")
+    .attr("r", 0)
+    .transition()
+    .duration(1000)
+    .attr("r", 30);
 
 }).catch(err => {
   console.error("Kon mockData.json niet laden:", err);
@@ -256,6 +262,8 @@ function renderDashboard() {
   // FYSIEKE STAAT
   const Box = d3.select(".physical svg");
 
+  d3.selectAll(".physical circle").remove();
+
   Box.append("circle")
     .attr("cx", 435)
     .attr("cy", 330)
@@ -273,6 +281,7 @@ function renderDashboard() {
     .attr("cy", 630)
     .attr("r", 30)
     .attr("fill", getStatusColor(currentSession.segments.lowerArm * 10));
+  
 
   // TEVREDENHEID
   const smiley = d3.select(".satisfaction svg");

@@ -342,6 +342,7 @@ a {
 .overlay-backdrop.active {
   opacity: 1;
   pointer-events: all;
+  backdrop-filter: blur(2px);
 }
 
 .overlay-panel {

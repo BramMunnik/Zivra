@@ -164,6 +164,7 @@ document.addEventListener('keydown', e => {
 // --- GLOBALE STATE ---
 let allSessions = [];
 let currentIndex = 0;
+let prevIndex = 0;
 
 // --- DATA OPHALEN ---
 d3.json("mockData.json").then(data => {
@@ -174,6 +175,7 @@ d3.json("mockData.json").then(data => {
 
   document.getElementById("btn-prev").addEventListener("click", () => {
     if (currentIndex > 0) {
+      prevIndex = currentIndex;
       currentIndex--;
       renderDashboard();
     }
@@ -181,6 +183,7 @@ d3.json("mockData.json").then(data => {
 
   document.getElementById("btn-next").addEventListener("click", () => {
     if (currentIndex < allSessions.length - 1) {
+      prevIndex = currentIndex;
       currentIndex++;
       renderDashboard();
     }
@@ -196,7 +199,7 @@ d3.json("mockData.json").then(data => {
 // --- DASHBOARD RENDER FUNCTIE ---
 function renderDashboard() {
   const currentSession = allSessions[currentIndex];
-  const prevSession = allSessions[currentIndex - 1]
+  const prevSession = allSessions[prevIndex]
   const firstSession = allSessions[0];
 
   document.getElementById("session-title").textContent = `Sessie ${currentSession.sessionId}`;
@@ -207,10 +210,11 @@ function renderDashboard() {
   document.getElementById("btn-prev").disabled = (currentIndex === 0);
   document.getElementById("btn-next").disabled = (currentIndex === allSessions.length - 1);
 
-  // 2. DATA BEREKENEN
+  // DATA BEREKENEN
   const getAvg = (seg) => Math.round(((seg.shoulder + seg.upperArm + seg.lowerArm) / 3) * 100);
   const firstAvg = getAvg(firstSession.segments);
   const currentAvg = getAvg(currentSession.segments);
+  const prevAvg = getAvg(prevSession.segments);
   
   const totalProgress = currentAvg - firstAvg; 
   const mood = currentSession.subjective.mood;
@@ -219,7 +223,7 @@ function renderDashboard() {
   const completedSessions = currentIndex + 1;
   const totalTrackSessions = 10; 
 
-  // 3. DYNAMISCHE KLEUREN
+  // DYNAMISCHE KLEUREN
   function getStatusColor(score, isPain = false) {
     if (isPain) {
       if (score < 5) return "#10b981";
@@ -236,20 +240,41 @@ function renderDashboard() {
   d3.select(".energy").style("border-top", `4px solid ${getStatusColor(charge, false)}`).style("background-color", `${getStatusColor(charge, false)}1A`);
   d3.select(".pain").style("border-top", `4px solid ${getStatusColor(pain, true)}`).style("background-color", `${getStatusColor(pain, true)}1A`);
 
-  // 4. TOTALE GROEI
+  // TOTALE GROEI
   const display = d3.select(".growth-value").text(totalProgress >= 0 ? `+${totalProgress}%` : `${totalProgress}%`);
   display.transition()
   .duration(1000)
   .ease(d3.easeCubicOut)
   .tween("text", function() {
-    const i = d3.interpolateNumber(0, totalProgress);
+    const i = d3.interpolateNumber(prevAvg - firstAvg, totalProgress);
     return function(t) {
       this.textContent = `${Math.round(i(t))}%`;
     };
   });
 
 
-  // 5. TEVREDENHEID
+  // FYSIEKE STAAT
+  const Box = d3.select(".physical svg");
+
+  Box.append("circle")
+    .attr("cx", 435)
+    .attr("cy", 330)
+    .attr("r", 30)
+    .attr("fill", getStatusColor(currentSession.segments.shoulder * 10));
+  
+  Box.append("circle")
+    .attr("cx", 460)
+    .attr("cy", 480)
+    .attr("r", 30)
+    .attr("fill", getStatusColor(currentSession.segments.upperArm * 10));
+
+  Box.append("circle")
+    .attr("cx", 490)
+    .attr("cy", 630)
+    .attr("r", 30)
+    .attr("fill", getStatusColor(currentSession.segments.lowerArm * 10));
+
+  // TEVREDENHEID
   const smiley = d3.select(".satisfaction svg");
   smiley.html("");
   const moodValDisplay = d3.select("#mood").text(`${mood}/10`);
@@ -261,7 +286,7 @@ function renderDashboard() {
   const curve = (mood - 5) * -2;
   smiley.append("path").attr("d", `M30,65 Q50,${65 - curve} 70,65`).attr("stroke", "#023047").attr("stroke-width", 4).attr("fill", "transparent");
 
-  // 6. ENERGIENIVEAU
+  // ENERGIENIVEAU
   const battery = d3.select(".energy svg");
   const energyValDisplay = d3.select("#energy-level").text(`${charge}/10`);
   
@@ -308,45 +333,45 @@ function renderDashboard() {
     .attr("y", 12 + 73 - fillHeight)
     .attr("fill", getStatusColor(charge, false));
 
-  // 7. PIJN
+  // PIJN
   const painValDisplay = d3.select("#pain-level").text(`${pain}/10`);
   const gifs = { low: "./img/static-cloud.png", medium: "./img/rain-cloud.gif", high: "./img/storm-cloud.gif" };
   let selectedGif = pain < 5 ? gifs.low : (pain < 7 ? gifs.medium : gifs.high);
   d3.select(".pain img").attr("src", selectedGif).style("margin", "0 auto");
 
-  // 8. PIJLFUNCTIE
+  // PIJLFUNCTIE
   function drawArrow(key, location){
-    location.selectAll("svg").remove()
+    location.selectAll("svg").remove();
     const svg = location.append("svg")
         .attr("width", 25)
         .attr("height", 25)
         .attr("viewBox", "0 0 100 100")
-        .classed("bounce", true)
+        .classed("bounce", true);
     if (!prevSession) return;
-    const prevValue = prevSession.subjective[key];
+    const prevValue = allSessions[currentIndex-1].subjective[key];
     const currentValue = currentSession.subjective[key];
     let improved = currentValue > prevValue;
     if (key === 'pain') improved = currentValue < prevValue;
     if (improved){
       svg.append("polygon")
         .attr("points", "50,10 90,90 10,90")
-        .attr("fill", "#10b981")
+        .attr("fill", "#10b981");
     }
     else if (currentValue !== prevValue){
         svg.append("polygon")
           .attr("points", "10,10 90,10 50,90")
-          .attr("fill", "#ef4444")
+          .attr("fill", "#ef4444");
     }
     else{
         svg.append("circle")
           .attr("cx", 50)
           .attr("cy", 50)
           .attr("r", 20)
-          .attr("fill", "gray")
+          .attr("fill", "gray");
     }
   }
 
-  drawArrow('mood', moodValDisplay)
-  drawArrow('energy', energyValDisplay)
-  drawArrow('pain', painValDisplay)
+  drawArrow('mood', moodValDisplay);
+  drawArrow('energy', energyValDisplay);
+  drawArrow('pain', painValDisplay);
 }

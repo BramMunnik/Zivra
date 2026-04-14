@@ -165,7 +165,7 @@ a {
 .tile.profile {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
 
   padding: 16px;

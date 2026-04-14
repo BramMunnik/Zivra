@@ -28,26 +28,85 @@ a {
   font-weight: 600;
 }
 
+/* --- VERNIEUWDE TOPBAR --- */
 .topbar {
   background: #ffffff;
-  padding: 16px 24px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 40px; /* Ruime padding voor een rustig beeld */
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Subtiele, zachte schaduw */
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky; /* Zorgt dat hij altijd bovenaan blijft plakken bij scrollen */
+  top: 0;
+  z-index: 100;
   height: auto;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
 
-.backbutton {
+/* Zorgt dat links, midden en rechts perfect balanceren (flexbox truc) */
+.topbar-left, .topbar-right {
+  flex: 1; 
   display: flex;
+  align-items: center;
+}
+
+.topbar-right {
+  justify-content: flex-end;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #64748b);
+}
+
+.topbar-center {
+  text-align: center;
+}
+
+/* --- LOGO --- */
+.logo {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary, #023047);
+  letter-spacing: -0.04em;
+}
+
+.logo span {
+  color: var(--accent, #219ebc); /* Het blauwe stipje van Zivra */
+}
+
+/* --- TERUG KNOP --- */
+.backbutton {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-muted);
-  transition: color 0.2s ease;
+  color: var(--text-main, #334155);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.backbutton svg {
+  transition: transform 0.2s ease;
+}
+
+/* Hover effect: Knop wordt primair blauw, schuift iets omhoog, en het pijltje schiet naar links */
 .backbutton:hover {
-  color: var(--accent);
+  background: var(--primary, #023047);
+  color: #ffffff;
+  border-color: var(--primary, #023047);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(2, 48, 71, 0.15);
+}
+
+.backbutton:hover svg {
+  transform: translateX(-4px);
 }
 
 /* --- GRID LAYOUT --- */

@@ -69,7 +69,7 @@ d3.json("mockData.json").then(data => {
     svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x)).attr("class", "axis-text");
     svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis-text");
 
-    // --- 5. INTERACTIVITEIT (Checkboxes) ---
+    // --- 5. INTERACTIVITEIT ---
     d3.select("#toggle-pain").on("change", function() {
         groupPain.transition().duration(300).style("opacity", d3.select(this).property("checked") ? 1 : 0);
     });

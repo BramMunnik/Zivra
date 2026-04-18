@@ -138,7 +138,7 @@
 
 /* --- NIEUWE GRAFIEK STIJLEN --- */
 .area-deficit {
-    fill: #ef4444; /* Zacht rood voor het tekort */
+    fill: #ef4444;
     opacity: 0.15;
 }
 
@@ -155,7 +155,6 @@
     pointer-events: none;
 }
 
-/* Verbeterde Tooltip lay-out voor meerdere waardes */
 .tooltip {
     position: absolute;
     background: #0f172a;

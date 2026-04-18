@@ -1,0 +1,80 @@
+:root {
+    --medical-blue: #023047;
+    --accent-blue: #219ebc;
+    --warning-red: #e63946;
+    --neutral-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #333;
+    line-height: 1.5;
+    padding: 30px;
+    background-color: #fff;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--neutral-bg);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.patient-header h1 { margin: 0; font-size: 28px; color: var(--medical-blue); }
+.patient-id { color: #666; font-family: monospace; }
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--neutral-bg);
+    padding-bottom: 5px;
+}
+
+.med-card {
+    background: var(--neutral-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-row:last-child { border: none; }
+.label { font-weight: 600; color: #555; }
+.value { text-align: right; }
+
+.vital-sign {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    border-left: 3px solid var(--accent-blue);
+}
+
+.vital-sign .label { display: block; font-size: 12px; }
+.vital-sign .num { font-size: 20px; font-weight: bold; color: var(--medical-blue); }
+
+.allergy-warning {
+    color: var(--warning-red);
+    font-weight: bold;
+    background: #ffe5e5;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+}

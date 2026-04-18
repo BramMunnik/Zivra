@@ -6,7 +6,7 @@ d3.json("mockData.json").then(data => {
     const prev = sessions.length > 1 ? sessions[sessions.length - 2] : last;
     const first = sessions[0];
 
-    // --- 1. STATISTIEKEN (Hoger = Beter) ---
+    // --- 1. STATISTIEKEN ---
     d3.select("#current-energy").text(`${last.subjective.energy}/10`);
 
     const diff = last.subjective.energy - prev.subjective.energy;
@@ -71,7 +71,7 @@ d3.json("mockData.json").then(data => {
     svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis-text");
 
 
-    // --- 5. INTERACTIVITEIT (Checkboxes) ---
+    // --- 5. INTERACTIVITEIT ---
     d3.select("#toggle-energy").on("change", function() {
         groupEnergy.transition().duration(300).style("opacity", d3.select(this).property("checked") ? 1 : 0);
     });

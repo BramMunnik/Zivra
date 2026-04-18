@@ -88,7 +88,7 @@ d3.json("mockData.json").then(data => {
     svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "%")).attr("class", "axis-text");
 
 
-    // --- 4. INTERACTIVITEIT (Checkboxes) ---
+    // --- 4. INTERACTIVITEIT ---
     d3.select("#toggle-shoulder").on("change", function() {
         groupShoulder.transition().duration(300).style("opacity", d3.select(this).property("checked") ? 1 : 0);
     });

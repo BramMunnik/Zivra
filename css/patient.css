@@ -236,47 +236,15 @@ a {
 .profile-content p {
   margin: 0;
   font-size: 14px;
-  color: #4b5563; /* soft gray */
+  color: #4b5563;
 }
 
 .profile-content span {
   font-weight: 500;
-  color: #111827; /* darker label */
+  color: #111827;
   margin-right: 6px;
 }
 
-
-/* .profile{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 4px;
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.profile h3 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.avatar {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
-  border-radius: 50%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 24px;
-}
-.avatar::after { content: "JJ"; } */
 
 /* Groei */
 .growth-value {
@@ -324,6 +292,17 @@ a {
   font-size: 32px;
   font-weight: 800;
   color: var(--primary);
+}
+
+.bounce {
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-6px); }
+  60%  { transform: translateY(2px); }
+  100% { transform: translateY(0); }
 }
 
 /* --- OVERLAY --- */
@@ -461,15 +440,4 @@ a {
   cursor: not-allowed;
   background: transparent;
   box-shadow: none;
-}
-
-.bounce {
-  animation: bounce 0.6s ease;
-}
-
-@keyframes bounce {
-  0%   { transform: translateY(0); }
-  30%  { transform: translateY(-6px); }
-  60%  { transform: translateY(2px); }
-  100% { transform: translateY(0); }
 }

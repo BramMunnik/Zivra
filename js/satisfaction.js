@@ -21,9 +21,7 @@ d3.json("mockData.json").then(data => {
     svg.append("rect").attr("x", 0).attr("y", y(4)).attr("width", width).attr("height", y(0) - y(4)).attr("class", "zone-red");
 
 
-    // --- 4. DATA LIJNEN GENEREREN ---
-    
-
+    // --- DATA LIJNEN GENEREREN ---
     const lineMood = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.mood)).curve(d3.curveMonotoneX);
     const lineEnergy = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.energy)).curve(d3.curveMonotoneX);
     const linePain = d3.line().x(d => x(d.sessionId)).y(d => y(d.subjective.pain)).curve(d3.curveMonotoneX);
@@ -53,7 +51,7 @@ d3.json("mockData.json").then(data => {
     svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis-text");
 
 
-    // --- 5. INTERACTIVITEIT ---
+    // --- INTERACTIVITEIT ---
     
     d3.select("#toggle-mood").on("change", function() {
         const isChecked = d3.select(this).property("checked");

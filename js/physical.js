@@ -10,12 +10,10 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
     };
 
     // --- SLIMME PARSER VOOR STERNUM ---
-    // In jouw CSV zitten waardes > 1.0 (ca 1.23). Dit zijn overduidelijk radialen!
-    // We repareren dit automatisch op basis van de waarde.
     const parseSternum = (val) => {
         let q = parseNum(val);
-        if (q > 1.0 || q < -1.0) return q * (180 / Math.PI); // Rad naar Deg
-        return quatToDeg(q); // Normale Quaternions
+        if (q > 1.0 || q < -1.0) return q * (180 / Math.PI);
+        return quatToDeg(q);
     };
 
     return {
@@ -27,19 +25,17 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
         upper_r: quatToDeg(parseNum(d.BovenRechts_QUAT)),
         lower_r: quatToDeg(parseNum(d.OnderRechts_QUAT)),
         sternum_deg: parseSternum(d.Sternum_QUAT),
-        // Nemen we mee om het dode start-frame te filteren
         sternum_acc: parseNum(d.Sternum_ACC) 
     };
 }).then(data => {
     if (!data || data.length === 0) return;
 
-    // --- FIX 1: FILTER DODE KALIBRATIE-FRAMES ---
-    // Soms begint een sensor-meting met rij 0 waar nog geen versnelling wordt gemeten
+    // Filter calibration frames
     while (data.length > 0 && data[0].sternum_acc === 0) {
         data.shift();
     }
 
-    // --- FIX 2: EULER UNWRAPPING ---
+    // Unwrap Eulers
     const unwrap = (val, prev) => {
         let diff = val - prev;
         while (diff > 180) { val -= 360; diff = val - prev; }
@@ -52,9 +48,9 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
         data[i].lower_l = unwrap(data[i].lower_l, data[i-1].lower_l);
     }
 
-    // --- FIX 3: NORMALIZED (SUBTRACT START) ---
     const start = { ...data[0] };
     
+    // Normalise data for somewhat accurate visuals
     data.forEach(d => {
         d.shoulder_l = d.shoulder_l - start.shoulder_l;
         d.shoulder_r = d.shoulder_r - start.shoulder_r;
@@ -62,13 +58,11 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
         d.upper_r = d.upper_r - start.upper_r;
         d.lower_l = d.lower_l - start.lower_l;
         d.lower_r = d.lower_r - start.lower_r;
-        // Zorg dat de romp-data ook exact op 0 begint te meten
         d.sternum_deg = Math.abs(d.sternum_deg - start.sternum_deg); 
     });
 
     const plotData = data.filter((d, i) => i % 4 === 0);
 
-    // --- STATISTIEKEN BEREKENEN ---
     const calcROM = (key) => Math.abs(d3.max(data, d => d[key]) - d3.min(data, d => d[key]));
     
     const romStats = {
@@ -81,7 +75,6 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
     const avgRight = (romStats.shoulder.r + romStats.upperArm.r + romStats.lowerArm.r) / 3;
     const symmetry = avgRight > 0 ? Math.round((avgLeft / avgRight) * 100) : 0;
 
-    // Posture score is nu accuraat! (0 afwijking = 100, elke graad gaat ervanaf)
     const maxSternumDeviation = d3.max(data, d => d.sternum_deg);
     const postureScore = Math.max(0, Math.round(100 - (maxSternumDeviation * 2.5)));
 
@@ -89,7 +82,6 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
     d3.select("#posture-score").text(`${postureScore}/100`).attr("class", `stat-value ${postureScore > 75 ? 'trend-up' : 'trend-down'}`);
     d3.select("#compensation-risk").text(postureScore < 70 ? "HOOG (Instabiel)" : "Normaal").style("color", postureScore < 70 ? "#ef4444" : "#10b981");
 
-    // --- GRAFIEK 1: ROM LIJNGRAFIEK ---
     const romContainer = d3.select("#rom-compare-chart");
     const rMargin = {top: 20, right: 20, bottom: 30, left: 40},
           rWidth = 500 - rMargin.left - rMargin.right,
@@ -176,7 +168,6 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
             focus.select("#dot-affected").attr("transform", `translate(${xRom(d.packet)}, ${yRom(d[props.l])})`);
             focus.select("#dot-healthy").attr("transform", `translate(${xRom(d.packet)}, ${yRom(d[props.r])})`);
 
-            // Live Wobble Dot update op de Sternum chart!
             const dev = d.sternum_deg;
             const sx = center + (scaleS(dev) * Math.sin(d.packet));
             const sy = center + (scaleS(dev) * Math.cos(d.packet));
@@ -201,7 +192,6 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
         }
     }
 
-    // --- GRAFIEK 2: STERNUM WOBBLE WINKEL (BULLSEYE) ---
     const sContainer = d3.select("#sternum-chart");
     const sSize = 220, center = sSize / 2;
     const svgSternum = sContainer.append("svg").attr("width", sSize).attr("height", sSize);
@@ -215,7 +205,6 @@ d3.dsv(";", "ZIVRA_sessie1_verwerkt.csv", function(d) {
 
     const scaleS = d3.scaleLinear().domain([0, 40]).range([0, 100]);
     
-    // De wolk past nu ook d.sternum_deg toe (die genormaliseerd is!)
     svgSternum.selectAll(".sternum-wobble").data(plotData).enter().append("circle").attr("class", "sternum-wobble")
         .attr("r", 2).attr("fill", "#94a3b8").attr("opacity", 0).attr("cx", center).attr("cy", center)
         .transition().delay((d, i) => i * 4).duration(400).attr("opacity", 0.4)

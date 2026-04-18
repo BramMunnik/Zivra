@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
   
   var searchInput = document.getElementById('searchInput');
   var statusFilter = document.getElementById('statusFilter');
@@ -119,4 +119,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-});
+// });

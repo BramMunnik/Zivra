@@ -105,7 +105,6 @@ h2 {
     padding: 20px;
     border-radius: 12px;
     border: 1px solid rgba(0,0,0,0.05);
-    /* Animatie settings */
     opacity: 0;
     transform: translateY(20px);
     animation: slideUp 0.5s ease forwards;

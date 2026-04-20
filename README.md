@@ -1,6 +1,7 @@
 # Zivra – Revalidatie Dashboard voor CVA-Herstel
 
-**Van ruwe sensordata naar direct klinisch inzicht.** ### 📘 Over het project
+**Van ruwe sensordata naar direct klinisch inzicht.** 
+### 📘 Over het project
 Dit project is uitgevoerd als onderdeel van de Minor Datavisualisatie binnen de opleiding **HBO-ICT van Zuyd Hogeschool**, in opdracht van het *Lectoraat Ondersteunende Technologie in de Zorg*. 
 
 Patiënten die herstellen van een CVA (hersenbloeding of -infarct) trainen steeds vaker zelfstandig thuis met VR/XR-games en sensor-hesjes. Therapeuten misten echter een manier om de miljoenen ruwe datapunten uit deze sessies efficiënt te interpreteren. Onze opdracht was om een *Proof of Concept* dashboard te ontwerpen en ontwikkelen dat deze ruwe, vaak vervuilde hardware-data transformeert naar een rustige, direct leesbare interface voor de therapeut.
